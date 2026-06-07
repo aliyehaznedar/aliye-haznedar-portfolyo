@@ -1,0 +1,298 @@
+
+%% DHRHFSP-SDST scheduling with factory eligibility and sequence-dependent setup
+% Reads: DHRHFSP_SDST_dataset.xlsx
+% Assumptions enforced in decoder:
+% 1) each job is assigned to exactly one eligible factory;
+% 2) factories have the same stage count, but different unrelated parallel machines;
+% 3) setup of the first operation on each machine is zero;
+% 4) all operations of an assigned job are processed in the assigned factory;
+% 5) processing time, setup time, machine energy rates and TOU prices are read from Excel;
+% 6) machine failures, power on/off energy and finite buffers are not modeled.
+
+clear; clc; rng(42);
+dataFile = 'DHRHFSP_SDST_dataset.xlsx';
+USE_ESRS = false;   % true = MOABC, false = MOABC1
+algName = 'MOABC1';
+
+D = loadData(dataFile);
+params.popSize = 20; params.maxIter = 20; params.limit = 5;
+params.pc = 0.70; params.pm = 0.15; params.archiveMax = 20;
+
+fprintf('Running %s: popSize=%d, maxIter=%d\n', algName, params.popSize, params.maxIter);
+tic;
+pop = cell(params.popSize,1); obj = zeros(params.popSize,2); trial = zeros(params.popSize,1);
+for p = 1:params.popSize
+    if p <= round(0.4*params.popSize)
+        pop{p} = greedyInit(D, 'time');
+    elseif p <= round(0.8*params.popSize)
+        pop{p} = greedyInit(D, 'energy');
+    else
+        pop{p} = randomInit(D);
+    end
+    obj(p,:) = evaluate(pop{p}, D, USE_ESRS);
+end
+archive = updateArchive({}, [], pop, obj, params.archiveMax);
+
+histBest = zeros(params.maxIter,2);
+for it = 1:params.maxIter
+    % Employed bee: crossover/mutation
+    for p = 1:params.popSize
+        q = randi(params.popSize); while q==p, q=randi(params.popSize); end
+        cand = pop{p};
+        if rand < params.pc
+            cand = crossoverFactories(pop{p}, pop{q}, D);
+        end
+        if rand < params.pm
+            cand = mutateSolution(cand, D);
+        end
+        candObj = evaluate(cand, D, USE_ESRS);
+        if dominates(candObj, obj(p,:)) || (~dominates(obj(p,:), candObj) && rand < 0.5)
+            pop{p} = cand; obj(p,:) = candObj; trial(p)=0;
+        else
+            trial(p)=trial(p)+1;
+        end
+    end
+    % Onlooker bee: neighborhood around selected solutions
+    fit = 1 ./ (1 + normalizeObjective(obj)); prob = fit / sum(fit);
+    for k = 1:params.popSize
+        p = roulette(prob);
+        cand = neighborhood(pop{p}, D);
+        candObj = evaluate(cand, D, USE_ESRS);
+        if dominates(candObj, obj(p,:)) || (~dominates(obj(p,:), candObj) && rand < 0.3)
+            pop{p} = cand; obj(p,:) = candObj; trial(p)=0;
+        else
+            trial(p)=trial(p)+1;
+        end
+    end
+    % Scout bee
+    for p = 1:params.popSize
+        if trial(p) > params.limit
+            if ~isempty(archive.sol) && rand < 0.7
+                cand = archive.sol{randi(numel(archive.sol))};
+                cand = mutateSolution(cand, D);
+            else
+                cand = randomInit(D);
+            end
+            pop{p}=cand; obj(p,:)=evaluate(cand,D,USE_ESRS); trial(p)=0;
+        end
+    end
+    archive = updateArchive(archive.sol, archive.obj, pop, obj, params.archiveMax);
+    [~,idx] = min(sum(normalizeObjective(archive.obj),2));
+    histBest(it,:) = archive.obj(idx,:);
+    if mod(it,20)==0
+        fprintf('%s iter %d: makespan=%.2f h, energy cost=%.2f CNY\n', algName, it, histBest(it,1), histBest(it,2));
+    end
+end
+
+[~,idx] = min(sum(normalizeObjective(archive.obj),2));
+bestSol = archive.sol{idx}; bestObj = archive.obj(idx,:);
+[schedule, objNoShift] = decodeSchedule(bestSol,D);
+if USE_ESRS
+    schedule = rightShiftSchedule(schedule,D,objNoShift(1));
+    bestObj = [objNoShift(1), energyCost(schedule,D,objNoShift(1))];
+end
+fprintf('\n%s final result\n', algName);
+fprintf('Makespan: %.2f h\n', bestObj(1));
+fprintf('Energy cost: %.2f CNY\n', bestObj(2));
+writeScheduleCSV(schedule, sprintf('%s_best_schedule.csv', algName));
+writematrix(histBest, sprintf('%s_history.csv', algName));
+
+%% ---------------- local functions ----------------
+function D = loadData(file)
+    D.factories = readtable(file,'Sheet','Factories');
+    D.machines = readtable(file,'Sheet','Machines');
+    D.jobs = readtable(file,'Sheet','Jobs');
+    D.ops = readtable(file,'Sheet','Operations');
+    D.proc = readtable(file,'Sheet','ProcessingTimes');
+    D.setup = readtable(file,'Sheet','SetupTimes');
+    D.tou = readtable(file,'Sheet','TOU');
+    D.nJobs = height(D.jobs); D.F = height(D.factories);
+end
+function sol = randomInit(D)
+    sol = cell(D.F,1);
+    for j=1:D.nJobs
+        ef = parseList(D.jobs.EligibleFactories{j}); f = ef(randi(numel(ef)));
+        sol{f} = [sol{f}, j];
+    end
+    for f=1:D.F, sol{f}=sol{f}(randperm(numel(sol{f}))); end
+end
+function sol = greedyInit(D, mode)
+    sol = cell(D.F,1); loadScore = zeros(D.F,1);
+    for j=randperm(D.nJobs)
+        ef = parseList(D.jobs.EligibleFactories{j}); bestF=ef(1); bestVal=Inf;
+        for f=ef
+            rows = D.proc(D.proc.JobID==j & D.proc.FactoryID==f,:);
+            if strcmp(mode,'energy')
+                mach = unique(rows.MachineID); er=0;
+                for m=mach', er=er+mean(D.machines.PW_processing_kWh_per_h(D.machines.MachineID==m)); end
+                val = loadScore(f)+mean(rows.ProcessingTime_h)*er;
+            else
+                val = loadScore(f)+sum(groupsummary(rows,'OperationIndex','min','ProcessingTime_h').min_ProcessingTime_h);
+            end
+            if val<bestVal, bestVal=val; bestF=f; end
+        end
+        sol{bestF}=[sol{bestF},j]; loadScore(bestF)=bestVal;
+    end
+end
+function nums = parseList(x)
+    if isnumeric(x), nums=x; return; end
+    txt = strtrim(char(x));
+    parts = regexp(txt, '[,; ]+', 'split');
+    nums = [];
+    for ii=1:numel(parts)
+        if ~isempty(parts{ii}), nums(end+1) = str2double(parts{ii}); end %#ok<AGROW>
+    end
+end
+function obj = evaluate(sol,D,useESRS)
+    [sched,obj0] = decodeSchedule(sol,D);
+    if useESRS, sched = rightShiftSchedule(sched,D,obj0(1)); end
+    obj = [obj0(1), energyCost(sched,D,obj0(1))];
+end
+function [schedule,obj] = decodeSchedule(sol,D)
+    schedule = table(); rows = {};
+    machAvail = containers.Map('KeyType','double','ValueType','double'); machPrev = containers.Map('KeyType','double','ValueType','double');
+    jobReady = zeros(D.nJobs,1);
+    for i=1:height(D.machines), machAvail(D.machines.MachineID(i))=0; machPrev(D.machines.MachineID(i))=0; end
+    for f=1:D.F
+        for jj=1:numel(sol{f})
+            j=sol{f}(jj); opsj=D.ops(D.ops.JobID==j,:);
+            for kk=1:height(opsj)
+                k=opsj.OperationIndex(kk); st=opsj.Stage(kk);
+                cand = D.proc(D.proc.JobID==j & D.proc.OperationIndex==k & D.proc.FactoryID==f,:);
+                bestEnd=Inf; best=[];
+                for r=1:height(cand)
+                    m=cand.MachineID(r); prev=machPrev(m);
+                    setup=0; setupStart=machAvail(m);
+                    if prev>0
+                        sr = D.setup(D.setup.MachineID==m & D.setup.PreviousJobID==prev & D.setup.CurrentJobID==j,:);
+                        setup = sr.SetupTime_h(1);
+                    end
+                    start = max(jobReady(j), machAvail(m)+setup);
+                    setupStart = start - setup; if prev==0, setupStart=start; setup=0; end
+                    finish = start + cand.ProcessingTime_h(r);
+                    if finish < bestEnd
+                        bestEnd=finish; best=[m, st, cand.LocalMachine(r), setupStart, setup, start, finish, cand.ProcessingTime_h(r)];
+                    end
+                end
+                rows(end+1,:) = {j,k,f,best(2),best(1),best(3),best(4),best(5),best(6),best(7),best(8)}; %#ok<AGROW>
+                machAvail(best(1))=best(7); machPrev(best(1))=j; jobReady(j)=best(7);
+            end
+        end
+    end
+    schedule = cell2table(rows,'VariableNames',{'JobID','OperationIndex','FactoryID','Stage','MachineID','LocalMachine','SetupStart','SetupTime','Start','End','ProcessingTime'});
+    cmax = max(schedule.End); obj=[cmax, energyCost(schedule,D,cmax)];
+end
+function cost = energyCost(schedule,D,cmax)
+    cost=0;
+    mids = unique(D.machines.MachineID);
+    for mi = 1:numel(mids)
+        m = mids(mi);
+        mr = D.machines(D.machines.MachineID == m, :);
+        ops = sortrows(schedule(schedule.MachineID == m, :), 'Start');
+        if isempty(ops), continue; end
+        first = min(ops.SetupStart); last = max(ops.End);
+        busyIntervals=[];
+        for r=1:height(ops)
+            if ops.SetupTime(r)>0
+                cost = cost + intervalCost(ops.SetupStart(r), ops.Start(r), mr.PS_setup_kWh_per_h(1), D.tou);
+                busyIntervals=[busyIntervals; ops.SetupStart(r), ops.Start(r)]; %#ok<AGROW>
+            end
+            cost = cost + intervalCost(ops.Start(r), ops.End(r), mr.PW_processing_kWh_per_h(1), D.tou);
+            busyIntervals=[busyIntervals; ops.Start(r), ops.End(r)]; %#ok<AGROW>
+        end
+        t=first;
+        busyIntervals=sortrows(busyIntervals,1);
+        for b=1:size(busyIntervals,1)
+            if busyIntervals(b,1)>t, cost=cost+intervalCost(t,busyIntervals(b,1),mr.PI_idle_kWh_per_h(1),D.tou); end
+            t=max(t,busyIntervals(b,2));
+        end
+        if last>t, cost=cost+intervalCost(t,last,mr.PI_idle_kWh_per_h(1),D.tou); end
+    end
+end
+function c = intervalCost(a,b,rate,tou)
+    c=0; if b<=a, return; end
+    t=a;
+    while t<b-1e-9
+        day=floor(t/24); h=t-24*day;
+        row=find(tou.StartHour<=h & h<tou.EndHour,1,'first');
+        if isempty(row), row=height(tou); end
+        next=day*24 + tou.EndHour(row); if next<=t, next=(day+1)*24; end
+        e=min(b,next); c=c+(e-t)*rate*tou.Price_CNY_per_kWh(row); t=e;
+    end
+end
+function sched = rightShiftSchedule(sched,D,cmax)
+    % Backward right-shift: each operation is delayed within precedence and machine slack.
+    sched = sortrows(sched, {'End'}, {'descend'});
+    for idx=1:height(sched)
+        j=sched.JobID(idx); k=sched.OperationIndex(idx); m=sched.MachineID(idx);
+        nextJob = sched(sched.JobID==j & sched.OperationIndex==k+1,:);
+        if isempty(nextJob), jobLimit=cmax; else, jobLimit=nextJob.Start(1); end
+        nextMach = sched(sched.MachineID==m & sched.Start>=sched.End(idx)-1e-9 & (sched.JobID~=j | sched.OperationIndex~=k),:);
+        if isempty(nextMach), machLimit=cmax; else, machLimit=min(nextMach.SetupStart); end
+        latestEnd = min(jobLimit, machLimit);
+        delta = latestEnd - sched.End(idx);
+        if delta > 1e-6
+            % Try several candidate shifts and keep cheapest interval cost for this operation+setup.
+            candidates = linspace(0,delta,min(8,max(2,ceil(delta)+1))); bestD=0; bestC=Inf;
+            mr=D.machines(D.machines.MachineID==m,:);
+            for d=candidates
+                sc = intervalCost(sched.Start(idx)+d, sched.End(idx)+d, mr.PW_processing_kWh_per_h(1), D.tou);
+                if sched.SetupTime(idx)>0, sc=sc+intervalCost(sched.SetupStart(idx)+d, sched.Start(idx)+d, mr.PS_setup_kWh_per_h(1), D.tou); end
+                if sc<bestC, bestC=sc; bestD=d; end
+            end
+            sched.SetupStart(idx)=sched.SetupStart(idx)+bestD; sched.Start(idx)=sched.Start(idx)+bestD; sched.End(idx)=sched.End(idx)+bestD;
+        end
+    end
+end
+function cand = mutateSolution(sol,D)
+    cand=sol; nonempty=find(cellfun(@numel,cand)>0); f=nonempty(randi(numel(nonempty)));
+    op=randi(3);
+    if op==1 && numel(cand{f})>=2
+        ix=randperm(numel(cand{f}),2); cand{f}(ix)=cand{f}(fliplr(ix));
+    elseif op==2 && numel(cand{f})>=2
+        ix=sort(randperm(numel(cand{f}),2)); cand{f}(ix(1):ix(2))=fliplr(cand{f}(ix(1):ix(2)));
+    else
+        pos=randi(numel(cand{f})); j=cand{f}(pos); ef=parseList(D.jobs.EligibleFactories{j}); nf=ef(randi(numel(ef)));
+        cand{f}(pos)=[]; ins=randi(numel(cand{nf})+1); cand{nf}=[cand{nf}(1:ins-1),j,cand{nf}(ins:end)];
+    end
+end
+function cand = neighborhood(sol,D)
+    cand=mutateSolution(sol,D);
+end
+function child = crossoverFactories(a,b,D)
+    child=cell(D.F,1); f=randi(D.F); child{f}=a{f}; used=child{f};
+    for ff=1:D.F
+        if ff==f, continue; end
+        seq=b{ff}; seq=seq(~ismember(seq,used));
+        child{ff}=seq; used=[used,seq]; %#ok<AGROW>
+    end
+    missing=setdiff(1:D.nJobs,used);
+    for j=missing
+        ef=parseList(D.jobs.EligibleFactories{j}); ff=ef(randi(numel(ef))); child{ff}=[child{ff},j];
+    end
+end
+function tf = dominates(a,b), tf=all(a<=b) && any(a<b); end
+function s = normalizeObjective(o)
+    mn=min(o,[],1); mx=max(o,[],1); s=(o-mn)./(mx-mn+1e-9); s=sum(s,2);
+end
+function idx = roulette(p)
+    c=cumsum(p); idx=find(rand<=c,1,'first'); if isempty(idx), idx=numel(p); end
+end
+function archive = updateArchive(oldSol, oldObj, pop, obj, maxN)
+    sol=[oldSol; pop]; allObj=[oldObj; obj]; keep=true(size(allObj,1),1);
+    for i=1:size(allObj,1)
+        for j=1:size(allObj,1)
+            if i~=j && dominates(allObj(j,:), allObj(i,:)), keep(i)=false; break; end
+        end
+    end
+    sol=sol(keep); allObj=allObj(keep,:);
+    [~,ia]=unique(round(allObj,6),'rows'); sol=sol(ia); allObj=allObj(ia,:);
+    if numel(sol)>maxN
+        score=normalizeObjective(allObj); [~,ord]=sort(score); ord=ord(1:maxN); sol=sol(ord); allObj=allObj(ord,:);
+    end
+    archive.sol=sol; archive.obj=allObj;
+end
+function writeScheduleCSV(sched, filename)
+    sched = sortrows(sched, {'FactoryID','MachineID','Start'});
+    writetable(sched, filename);
+end
