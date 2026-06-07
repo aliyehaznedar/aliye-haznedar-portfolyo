@@ -1,0 +1,216 @@
+{\rtf1\ansi\ansicpg1254\deff0\nouicompat\deflang1055{\fonttbl{\f0\fnil\fcharset162 Courier New;}{\f1\fnil\fcharset0 Courier New;}{\f2\fnil\fcharset238 Courier New;}}
+{\colortbl ;\red0\green0\blue255;\red0\green0\blue0;\red0\green175\blue0;}
+{\*\generator Riched20 10.0.26100}\viewkind4\uc1 
+\pard\cf1\f0\fs20 MODEL\cf2 :\par
+\par
+\cf3 ! K\f1\lang1033\'fc\f0\lang1055 meler ;\cf2\par
+\cf1 SETS\cf2 :\par
+\par
+    Periyot /1..4/; \cf3 !d\f1\lang1033\'f6\f0\lang1055 nem k\f1\lang1033\'fc\f0\lang1055 mesi;\cf2\par
+\par
+    \cf3 !Hammaddeler ve her hammaddeye ait kalite, maliyet ve kapasite parametreler;\cf2\par
+    Uretim_hammadde /H1..H4/: Asidite, Govde, Aroma, TedarikKap, HBirimMal;\par
+\par
+    \cf3 !\f1\lang1033\'fc\f0\lang1055 r\f1\lang1033\'fc\f0\lang1055 nler,\f1\lang1033\'fc\f0\lang1055 r\f1\lang1033\'fc\f0\lang1055 n kalite standartlar\f2\u305?\f0  ve stok mliyeti;\cf2\par
+    Urun_cesidi     /GOLD, CLASSIC/: MinAsid, MaxAsid, MinGovde, MinAroma, StokMal;\par
+\par
+    \cf3 !Fabrikalar ve d\f1\lang1033\'f6\f0\lang1055 nemlik kapasite;\cf2\par
+    Fabrika_konum   /IZMIR, ANTEP/: FabKapasite;\par
+\par
+    \cf3 !\f1\lang1033\'dc\f0\lang1055 retim modlar\f2\u305?\f0 ;\cf2\par
+    Uretim_sekli    /NORMAL, FAZLA, FASON/;\par
+\par
+    \cf3 !Aday depolar, kurulum maliyeti, sabit gider kapasite ve a\f1\lang1033\'e7\f0\lang1055 ma de\f2\u287?\f0 i\f2\'ba\f0 keni;\cf2\par
+    Aday_depoKonum  /ANKARA, BURSA, KONYA/: DKurulumMal, DSabit_Mal, Depo_Kap, depo_Acilma;\par
+\par
+    Musteri /M1..M3/; \cf3 !M\f1\lang1033\'fc\f2\lang1055\'ba\f0 teriler;\cf2\par
+\par
+   \cf3 ! Fabrika-Mod ikilisi i\f1\lang1033\'e7in kapasite ve \'fcretim maliyeti parametreleri\f0\lang1055 ;\cf2\par
+\f2\lang1033     Fabrika_Mod(Fabrika_konum, Uretim_sekli): Uretim_Capacity, Uretim_Cost;\par
+\par
+\f0\lang1055      \cf3 ! Karar de\f2\u287?i\'bakeni: \f1\lang1033\'fcretim miktar\f2\u305? X(f,i,u,t)\f0\lang1055 ;\cf2\f2\lang1033\par
+    Uretim_Atama(Fabrika_konum, Urun_cesidi, Uretim_sekli, Periyot): X;\par
+\par
+\f0\lang1055     \cf3 ! Karar de\f2\u287?i\'bakeni: hammadde kullan\u305?m\u305? M(j,f,i,t)\f0 ;\cf2\f2\lang1033\par
+    Hammadde_Atama(Uretim_hammadde, Fabrika_konum, Urun_cesidi, Periyot): M;\par
+\par
+\f0\lang1055     \cf3 ! Karar de\f2\u287?i\'bakeni: depo stok miktar\u305? Stok(d,i,t)\f0 ;\cf2\f2\lang1033\par
+    Stok_Atama(Aday_depoKonum, Urun_cesidi, Periyot): Stok;\par
+\par
+\f0\lang1055     \cf3 ! Fabrika-Depo ta\f2\'ba\u305?ma maliyeti parametresi ve ak\u305?\'ba de\u287?i\'bakeni S(f,d,i,t)\f0 ;\cf2\f2\lang1033\par
+    TasimaCostF_D(Fabrika_konum, Aday_depoKonum): T1BirimMal;\par
+    AkisFab_Depo(Fabrika_konum, Aday_depoKonum, Urun_cesidi, Periyot): S;\par
+\par
+\f0\lang1055     \cf3 ! Depo->M\f1\lang1033\'fc\f2\'bateri ta\'ba\u305?ma maliyeti parametresi ve ak\u305?\'ba de\u287?i\'bakeni K(d,c,i,t)\f0\lang1055 ;\cf2\f2\lang1033\par
+    TasimaCostD_M(Aday_depoKonum, Musteri): T2BirimMal;\par
+    AkisDepo_Musteri(Aday_depoKonum, Musteri, Urun_cesidi, Periyot): K;\par
+\par
+ \f0\lang1055    \cf3\f2\lang1033 ! Talep parametresi TalepMiktari(t,c,i)\f0\lang1055 ;\cf2\f2\lang1033\par
+    Talep_Atama(Periyot, Musteri, Urun_cesidi): TalepMiktari;\par
+\par
+\cf1 ENDSETS\cf2\par
+\par
+\cf3\f0\lang1055 !Verinin okunmas\f2\u305?\f0 ;\cf2\f2\lang1033\par
+\cf1 DATA\cf2 :\par
+\cf3 ! A\'baa\u287?\u305?daki parametreler Excel dosyas\u305?ndan okunmaktad\u305?r\f0\lang1055 ;\cf2\par
+\f2\lang1033\par
+Asidite, Govde, Aroma, TedarikKap, HBirimMal,\par
+MinAsid, MaxAsid, MinGovde, MinAroma,\par
+Uretim_Capacity, Uretim_Cost,\par
+Depo_Kap, DKurulumMal, DSabit_Mal,\par
+TalepMiktari,\par
+T1BirimMal, T2BirimMal\f0\lang1055 ,BigM,StokMal,FabKapasite\f2\lang1033\par
+=\par
+\cf1 @OLE\cf2 ( 'C:/Users/Nursena/OneDrive/Masa\f1\'fcst\'fc/lingoproje/\f0\lang1055 Cafeco_Veri\f1\lang1033 .xlsx',\par
+      \f0\lang1055 '\f2\lang1033 Asidite\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 Govde\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 Aroma\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 TedarikKap\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 HBirimMal\f0\lang1055 '\f2\lang1033 ,\par
+\f0\lang1055 '\f2\lang1033 MinAsid\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 MaxAsid\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 MinGovde\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 MinAroma\f0\lang1055 '\f2\lang1033 ,\par
+\f0\lang1055 '\f2\lang1033 Uretim_Capacity\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 Uretim_Cost\f0\lang1055 '\f2\lang1033 ,\par
+\f0\lang1055 '\f2\lang1033 Depo_Kap\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 DKurulumMal\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 DSabit_Mal\f0\lang1055 '\f2\lang1033 ,\par
+\f0\lang1055 '\f2\lang1033 TalepMiktari\f0\lang1055 '\f2\lang1033 ,\par
+\f0\lang1055 '\f2\lang1033 T1BirimMal\f0\lang1055 '\f2\lang1033 , \f0\lang1055 '\f2\lang1033 T2BirimMal\f0\lang1055 ','BigM','StokMal','FabKapasite'\f1\lang1033 );\par
+\par
+\cf1 ENDDATA\cf2\par
+\par
+\cf3\f0\lang1055 !Ama\f1\lang1033\'e7\f0\lang1055  fonksiyonu(minimizasyon);\cf2\f1\lang1033\par
+\cf1\f2 MIN\cf2  =\par
+    \cf1 @SUM\cf2 (Hammadde_Atama(j,f,i,t): M(j,f,i,t) * HBirimMal(j))\par
+  + \cf1 @SUM\cf2 (Uretim_Atama(f,i,u,t): X(f,i,u,t) * Uretim_Cost(f,u))\par
+  + \cf1 @SUM\cf2 (Stok_Atama(d,i,t): Stok(d,i,t) * StokMal(i))\par
+  + \cf1 @SUM\cf2 (Aday_depoKonum(d): depo_Acilma(d) * DKurulumMal(d))\par
+  + \cf1 @SUM\cf2 (Aday_depoKonum(d): \cf1 @SUM\cf2 (Periyot(t): depo_Acilma(d) * DSabit_Mal(d)))\par
+  + \cf1 @SUM\cf2 (AkisFab_Depo(f,d,i,t): S(f,d,i,t) * T1BirimMal(f,d))\par
+  + \cf1 @SUM\cf2 (AkisDepo_Musteri(d,c,i,t): K(d,c,i,t) * T2BirimMal(d,c));\par
+\par
+\par
+\cf3\f0\lang1055 !K\f2\u305?\f0 s\f2\u305?\f0 tlar;\cf2\par
+\f2\lang1033\par
+\cf3 ! Hammadde - \f1\'dcretim dengesi: kullan\f2\u305?lan hammadde = \f1\'fcretilen miktar\f0\lang1055 ;\cf2\f2\lang1033\par
+\cf1\f1 @FOR\cf2 (Fabrika_konum(f): \cf1 @FOR\cf2 (Urun_cesidi(i): \cf1 @FOR\cf2 (Periyot(t):\par
+    \cf1 @SUM\cf2 (Uretim_hammadde(j): M(j,f,i,t)) = \cf1 @SUM\cf2 (Uretim_sekli(u): X(f,i,u,t));\par
+)));\par
+\par
+\par
+\cf3 ! Kalite k\f2\u305?s\u305?tlar\u305?: asidite min/max, g\f1\'f6vde min, aroma min\f0\lang1055 ;\cf2\f1\lang1033\par
+\cf1 @FOR\cf2 (Fabrika_konum(f): \cf1 @FOR\cf2 (Urun_cesidi(i): \cf1 @FOR\cf2 (Periyot(t):\par
+    \cf1 @SUM\cf2 (Uretim_hammadde(j): Asidite(j) * M(j,f,i,t)) >= MinAsid(i) * \cf1 @SUM\cf2 (Uretim_sekli(u): X(f,i,u,t));\par
+    \cf1 @SUM\cf2 (Uretim_hammadde(j): Asidite(j) * M(j,f,i,t)) <= MaxAsid(i) * \cf1 @SUM\cf2 (Uretim_sekli(u): X(f,i,u,t));\par
+    \cf1 @SUM\cf2 (Uretim_hammadde(j): Govde(j)   * M(j,f,i,t)) >= MinGovde(i) * \cf1 @SUM\cf2 (Uretim_sekli(u): X(f,i,u,t));\par
+    \cf1 @SUM\cf2 (Uretim_hammadde(j): Aroma(j)   * M(j,f,i,t)) >= MinAroma(i) * \cf1 @SUM\cf2 (Uretim_sekli(u): X(f,i,u,t));\par
+)));\par
+\par
+\par
+\cf3 ! Hammadde tedarik kapasitesi: toplam kullan\f2\u305?m <= tedarik kapasitesi\f0\lang1055 ;\cf2\f1\lang1033\par
+\cf1\f2 @FOR\cf2 (Uretim_hammadde(j): \cf1 @FOR\cf2 (Periyot(t):\par
+    \cf1 @SUM\cf2 (Fabrika_konum(f): \cf1 @SUM\cf2 (Urun_cesidi(i): M(j,f,i,t))) <= TedarikKap(j);\par
+));\par
+\par
+\cf3 ! \f1\'dcretim modu kapasitesi: mod baz\f2\u305?nda \f1\'fcretim <= mod kapasitesi\f0\lang1055 ;\cf2\f2\lang1033\par
+\cf1 @FOR\cf2 (Fabrika_konum(f): \cf1 @FOR\cf2 (Uretim_sekli(u): \cf1 @FOR\cf2 (Periyot(t):\par
+    \cf1 @SUM\cf2 (Urun_cesidi(i): X(f,i,u,t)) <= Uretim_Capacity(f,u);\par
+)));\par
+\par
+\f1\par
+\cf3 ! Fabrika toplam kapasitesi: t\'fcm \'fcr\'fcn+mod toplam\f2\u305? <= fabrika kapasitesi\f0\lang1055 ;\cf2\f1\lang1033\par
+\cf1 @FOR\cf2 (Fabrika_konum(f): \cf1 @FOR\cf2 (Periyot(t):\par
+    \cf1 @SUM\cf2 (Urun_cesidi(i): \cf1 @SUM\cf2 (Uretim_sekli(u): X(f,i,u,t))) <= FabKapasite(f);\par
+));\par
+\par
+\par
+\cf3 ! Fabrikada stok yok: \'fcretim = depolara sevk edilen miktar\f0\lang1055 ;\cf2\f1\lang1033\par
+\cf1 @FOR\cf2 (Fabrika_konum(f): \cf1 @FOR\cf2 (Urun_cesidi(i): \cf1 @FOR\cf2 (Periyot(t):\par
+    \cf1 @SUM\cf2 (Uretim_sekli(u): X(f,i,u,t)) = \cf1 @SUM\cf2 (Aday_depoKonum(d): S(f,d,i,t));\par
+)));\par
+\par
+\f2\par
+\cf3 ! Depo kapasitesi: depo a\f1\'e7\f2\u305?ksa stok <= kapasite, kapal\u305?ysa stok=0\f0\lang1055 ;\cf2\f2\lang1033\par
+\cf1 @FOR\cf2 (Aday_depoKonum(d): \cf1 @FOR\cf2 (Periyot(t):\par
+    \cf1 @SUM\cf2 (Urun_cesidi(i): Stok(d,i,t)) <= Depo_Kap(d) * depo_Acilma(d);\par
+));\par
+\par
+\cf3 ! Depo stok dengesi: stok(t)=stok(t-1)+giri\'ba-\f1\'e7\f2\u305?k\u305?\'ba\f0\lang1055 ;\cf2\f2\lang1033\par
+\cf1 @FOR\cf2 (Aday_depoKonum(d): \cf1 @FOR\cf2 (Urun_cesidi(i):\par
+    Stok(d,i,1) = \cf1 @SUM\cf2 (Fabrika_konum(f): S(f,d,i,1)) - \cf1 @SUM\cf2 (Musteri(c): K(d,c,i,1));\par
+    Stok(d,i,2) = Stok(d,i,1) + \cf1 @SUM\cf2 (Fabrika_konum(f): S(f,d,i,2)) - \cf1 @SUM\cf2 (Musteri(c): K(d,c,i,2));\par
+    Stok(d,i,3) = Stok(d,i,2) + \cf1 @SUM\cf2 (Fabrika_konum(f): S(f,d,i,3)) - \cf1 @SUM\cf2 (Musteri(c): K(d,c,i,3));\par
+    Stok(d,i,4) = Stok(d,i,3) + \cf1 @SUM\cf2 (Fabrika_konum(f): S(f,d,i,4)) - \cf1 @SUM\cf2 (Musteri(c): K(d,c,i,4));\par
+));\par
+\par
+\par
+\cf3 ! Talep kar\'ba\u305?lama: depolardan g\f1\'f6nderilen toplam >= talep\f0\lang1055 ;\cf2\f2\lang1033\par
+\cf1 @FOR\cf2 (Periyot(t): \cf1 @FOR\cf2 (Musteri(c): \cf1 @FOR\cf2 (Urun_cesidi(i):\par
+    \cf1 @SUM\cf2 (Aday_depoKonum(d): K(d,c,i,t)) >= TalepMiktari(t,c,i);\par
+)));\par
+\par
+\par
+\cf3 ! Big-M: Depo kapal\u305?ysa sevkiyat yapamaz\f0\lang1055 ;\cf2\f2\lang1033\par
+\cf1 @FOR\cf2 (Aday_depoKonum(d): \cf1 @FOR\cf2 (Urun_cesidi(i): \cf1 @FOR\cf2 (Periyot(t):\par
+    \cf1 @SUM\cf2 (Musteri(c): K(d,c,i,t)) <= BigM * depo_Acilma(d);\par
+)));\par
+\f1\par
+\par
+\cf3 !\f0\lang1055  \f1\lang1033 Depo se\'e7imini sabitl\f0\lang1055 iyoruz\f1\lang1033 (\f0\lang1055 duyarl\f2\u305?\f0 l\f2\u305?\f0 k analizi i\f1\lang1033\'e7\f0\lang1055 in)\f1\lang1033 ;\cf2\par
+\cf3\f0\lang1055 !\f1\lang1033 depo_Acilma( @INDEX(Aday_depoKonum, 'ANKARA') ) = 0;\cf2\par
+\cf3\f0\lang1055 !\f1\lang1033 depo_Acilma( @INDEX(Aday_depoKonum, 'BURSA')  ) = 1;\cf2\par
+\cf3\f0\lang1055 !\f1\lang1033 depo_Acilma( @INDEX(Aday_depoKonum, 'KONYA')  ) = 0;\cf2\par
+\par
+\cf3 !  En fazla 2 depo a\'e7\f2\u305?labilir\f0\lang1055 ;\cf2\f1\lang1033\par
+\cf1 @SUM\cf2 (Aday_depoKonum(d): depo_Acilma(d)) <= 2;\par
+\par
+\par
+\cf3 !  Depo a\'e7ma de\f2\u287?i\'bakeni \f0\lang1055 binarydir \f2\lang1033 (0-1)\f0\lang1055 ;\cf2\f1\lang1033\par
+\cf1 @FOR\cf2 (Aday_depoKonum(d): \cf1 @BIN\cf2 (depo_Acilma(d)));\par
+\par
+\cf1 END\cf2\f2\par
+\f1\par
+\cf3\f0\lang1055 !Maliyet Bile\f2\'ba\f0 enleri;\cf2\f2\lang1033\par
+\f1\par
+Hammadde_Maliyeti =\par
+    \cf1 @SUM\cf2 (Hammadde_Atama(j,f,i,t): M(j,f,i,t) * HBirimMal(j));\par
+\par
+Uretim_Maliyeti =\par
+    \cf1 @SUM\cf2 (Uretim_Atama(f,i,u,t): X(f,i,u,t) * Uretim_Cost(f,u));\par
+\par
+Stok_Maliyeti =\par
+    \cf1 @SUM\cf2 (Stok_Atama(d,i,t): Stok(d,i,t) * StokMal(i));\par
+\par
+Depo_Kurulum_Maliyeti =\par
+    \cf1 @SUM\cf2 (Aday_depoKonum(d): depo_Acilma(d) * DKurulumMal(d));\par
+\par
+Depo_Sabit_Maliyeti =\par
+    \cf1 @SUM\cf2 (Aday_depoKonum(d): depo_Acilma(d) * DSabit_Mal(d) * \cf1 @SIZE\cf2 (Periyot));\par
+\par
+FabrikaDepo_Tasima_Maliyeti =\par
+    \cf1 @SUM\cf2 (AkisFab_Depo(f,d,i,t): S(f,d,i,t) * T1BirimMal(f,d));\par
+\par
+DepoMusteri_Tasima_Maliyeti =\par
+    \cf1 @SUM\cf2 (AkisDepo_Musteri(d,c,i,t): K(d,c,i,t) * T2BirimMal(d,c));\par
+\par
+Toplam_Maliyet =\par
+    Hammadde_Maliyeti + Uretim_Maliyeti + Stok_Maliyeti\par
+  + Depo_Kurulum_Maliyeti + Depo_Sabit_Maliyeti\par
+  + FabrikaDepo_Tasima_Maliyeti + DepoMusteri_Tasima_Maliyeti;\par
+\f2\par
+\f1\par
+\cf1 END\cf2\par
+\f0\lang1055\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\f1\par
+\par
+\par
+\par
+\par
+
+\pard\cf0\par
+}
+ 

@@ -1,0 +1,613 @@
+  LINGO/WIN64 21.0.38 (22 Apr 2025), LINDO API 15.0.6099.233
+
+  Licensee info: nursena.aci@ogr.deu.edu.tr
+  License expires:  5 APR 2026
+
+  Global optimal solution found.
+  Objective value:                              533840.7
+  Objective bound:                              533840.7
+  Infeasibilities:                              0.000000
+  Extended solver steps:                               8
+  Total solver iterations:                           521
+  Elapsed runtime seconds:                          2.75
+
+  Model Class:                                      MILP
+
+  Total variables:                    259
+  Nonlinear variables:                  0
+  Integer variables:                    3
+
+  Total constraints:                  230
+  Nonlinear constraints:                0
+
+  Total nonzeros:                    1444
+  Nonlinear nonzeros:                   0
+
+
+
+                                Variable           Value        Reduced Cost
+                                    BIGM        100000.0            0.000000
+                            ASIDITE( H1)       0.5000000            0.000000
+                            ASIDITE( H2)       0.4000000            0.000000
+                            ASIDITE( H3)       0.3000000            0.000000
+                            ASIDITE( H4)       0.5500000            0.000000
+                              GOVDE( H1)       0.4500000            0.000000
+                              GOVDE( H2)       0.5000000            0.000000
+                              GOVDE( H3)       0.3000000            0.000000
+                              GOVDE( H4)       0.3500000            0.000000
+                              AROMA( H1)       0.2500000            0.000000
+                              AROMA( H2)       0.2000000            0.000000
+                              AROMA( H3)       0.1500000            0.000000
+                              AROMA( H4)       0.1000000            0.000000
+                         TEDARIKKAP( H1)        2000.000            0.000000
+                         TEDARIKKAP( H2)        2000.000            0.000000
+                         TEDARIKKAP( H3)        2000.000            0.000000
+                         TEDARIKKAP( H4)        2000.000            0.000000
+                          HBIRIMMAL( H1)        25.00000            0.000000
+                          HBIRIMMAL( H2)        22.00000            0.000000
+                          HBIRIMMAL( H3)        20.00000            0.000000
+                          HBIRIMMAL( H4)        24.00000            0.000000
+                          MINASID( GOLD)       0.4500000            0.000000
+                       MINASID( CLASSIC)       0.3000000            0.000000
+                          MAXASID( GOLD)       0.6000000            0.000000
+                       MAXASID( CLASSIC)       0.5000000            0.000000
+                         MINGOVDE( GOLD)       0.4000000            0.000000
+                      MINGOVDE( CLASSIC)       0.3000000            0.000000
+                         MINAROMA( GOLD)       0.2000000            0.000000
+                      MINAROMA( CLASSIC)       0.1000000            0.000000
+                          STOKMAL( GOLD)        4.000000            0.000000
+                       STOKMAL( CLASSIC)        6.000000            0.000000
+                     FABKAPASITE( IZMIR)        2000.000            0.000000
+                     FABKAPASITE( ANTEP)        2000.000            0.000000
+                    DKURULUMMAL( ANKARA)        100000.0            0.000000
+                     DKURULUMMAL( BURSA)        90000.00            0.000000
+                     DKURULUMMAL( KONYA)        95000.00            0.000000
+                     DSABIT_MAL( ANKARA)        5000.000            0.000000
+                      DSABIT_MAL( BURSA)        4500.000            0.000000
+                      DSABIT_MAL( KONYA)        4800.000            0.000000
+                       DEPO_KAP( ANKARA)        4000.000            0.000000
+                        DEPO_KAP( BURSA)        3500.000            0.000000
+                        DEPO_KAP( KONYA)        3800.000            0.000000
+                    DEPO_ACILMA( ANKARA)        0.000000          -0.3093714E+08
+                     DEPO_ACILMA( BURSA)        1.000000            108000.0
+                     DEPO_ACILMA( KONYA)        0.000000          -0.1516941E+08
+         URETIM_CAPACITY( IZMIR, NORMAL)        1500.000            0.000000
+          URETIM_CAPACITY( IZMIR, FAZLA)        400.0000            0.000000
+          URETIM_CAPACITY( IZMIR, FASON)        300.0000            0.000000
+         URETIM_CAPACITY( ANTEP, NORMAL)        1600.000            0.000000
+          URETIM_CAPACITY( ANTEP, FAZLA)        500.0000            0.000000
+          URETIM_CAPACITY( ANTEP, FASON)        300.0000            0.000000
+             URETIM_COST( IZMIR, NORMAL)        10.00000            0.000000
+              URETIM_COST( IZMIR, FAZLA)        13.00000            0.000000
+              URETIM_COST( IZMIR, FASON)        16.00000            0.000000
+             URETIM_COST( ANTEP, NORMAL)        11.00000            0.000000
+              URETIM_COST( ANTEP, FAZLA)        14.00000            0.000000
+              URETIM_COST( ANTEP, FASON)        17.00000            0.000000
+              X( IZMIR, GOLD, NORMAL, 1)        600.0000            0.000000
+              X( IZMIR, GOLD, NORMAL, 2)        850.0000            0.000000
+              X( IZMIR, GOLD, NORMAL, 3)        800.0000            0.000000
+              X( IZMIR, GOLD, NORMAL, 4)        1300.000            0.000000
+               X( IZMIR, GOLD, FAZLA, 1)        400.0000            0.000000
+               X( IZMIR, GOLD, FAZLA, 2)        0.000000            0.000000
+               X( IZMIR, GOLD, FAZLA, 3)        0.000000            0.000000
+               X( IZMIR, GOLD, FAZLA, 4)        400.0000            0.000000
+               X( IZMIR, GOLD, FASON, 1)        100.0000            0.000000
+               X( IZMIR, GOLD, FASON, 2)        100.0000            0.000000
+               X( IZMIR, GOLD, FASON, 3)        0.000000            0.000000
+               X( IZMIR, GOLD, FASON, 4)        0.000000            0.000000
+           X( IZMIR, CLASSIC, NORMAL, 1)        900.0000            0.000000
+           X( IZMIR, CLASSIC, NORMAL, 2)        650.0000            0.000000
+           X( IZMIR, CLASSIC, NORMAL, 3)        700.0000            0.000000
+           X( IZMIR, CLASSIC, NORMAL, 4)        200.0000            0.000000
+            X( IZMIR, CLASSIC, FAZLA, 1)        0.000000            0.000000
+            X( IZMIR, CLASSIC, FAZLA, 2)        400.0000            0.000000
+            X( IZMIR, CLASSIC, FAZLA, 3)        400.0000            0.000000
+            X( IZMIR, CLASSIC, FAZLA, 4)        0.000000            0.000000
+            X( IZMIR, CLASSIC, FASON, 1)        0.000000            0.000000
+            X( IZMIR, CLASSIC, FASON, 2)        0.000000            0.000000
+            X( IZMIR, CLASSIC, FASON, 3)        100.0000            0.000000
+            X( IZMIR, CLASSIC, FASON, 4)        100.0000            0.000000
+              X( ANTEP, GOLD, NORMAL, 1)        100.0000            0.000000
+              X( ANTEP, GOLD, NORMAL, 2)        450.0000            0.000000
+              X( ANTEP, GOLD, NORMAL, 3)        750.0000            0.000000
+              X( ANTEP, GOLD, NORMAL, 4)        0.000000            0.000000
+               X( ANTEP, GOLD, FAZLA, 1)        0.000000            3.000000
+               X( ANTEP, GOLD, FAZLA, 2)        0.000000            3.000000
+               X( ANTEP, GOLD, FAZLA, 3)        0.000000            3.000000
+               X( ANTEP, GOLD, FAZLA, 4)        0.000000            3.000000
+               X( ANTEP, GOLD, FASON, 1)        0.000000            6.000000
+               X( ANTEP, GOLD, FASON, 2)        0.000000            6.000000
+               X( ANTEP, GOLD, FASON, 3)        0.000000            6.000000
+               X( ANTEP, GOLD, FASON, 4)        0.000000            6.000000
+           X( ANTEP, CLASSIC, NORMAL, 1)        0.000000            0.000000
+           X( ANTEP, CLASSIC, NORMAL, 2)        0.000000            0.000000
+           X( ANTEP, CLASSIC, NORMAL, 3)        0.000000            0.000000
+           X( ANTEP, CLASSIC, NORMAL, 4)        1050.000            0.000000
+            X( ANTEP, CLASSIC, FAZLA, 1)        0.000000            3.000000
+            X( ANTEP, CLASSIC, FAZLA, 2)        0.000000            3.000000
+            X( ANTEP, CLASSIC, FAZLA, 3)        0.000000            3.000000
+            X( ANTEP, CLASSIC, FAZLA, 4)        0.000000            3.000000
+            X( ANTEP, CLASSIC, FASON, 1)        0.000000            6.000000
+            X( ANTEP, CLASSIC, FASON, 2)        0.000000            6.000000
+            X( ANTEP, CLASSIC, FASON, 3)        0.000000            6.000000
+            X( ANTEP, CLASSIC, FASON, 4)        0.000000            6.000000
+                  M( H1, IZMIR, GOLD, 1)        314.2857            0.000000
+                  M( H1, IZMIR, GOLD, 2)        271.4286            0.000000
+                  M( H1, IZMIR, GOLD, 3)        228.5714            0.000000
+                  M( H1, IZMIR, GOLD, 4)        485.7143            0.000000
+               M( H1, IZMIR, CLASSIC, 1)        0.000000            3.500000
+               M( H1, IZMIR, CLASSIC, 2)        0.000000            3.500000
+               M( H1, IZMIR, CLASSIC, 3)        0.000000            3.500000
+               M( H1, IZMIR, CLASSIC, 4)        0.000000            3.500000
+                  M( H1, ANTEP, GOLD, 1)        28.57143            0.000000
+                  M( H1, ANTEP, GOLD, 2)        128.5714            0.000000
+                  M( H1, ANTEP, GOLD, 3)        214.2857            0.000000
+                  M( H1, ANTEP, GOLD, 4)        0.000000            0.000000
+               M( H1, ANTEP, CLASSIC, 1)        0.000000            3.500000
+               M( H1, ANTEP, CLASSIC, 2)        0.000000            3.500000
+               M( H1, ANTEP, CLASSIC, 3)        0.000000            3.500000
+               M( H1, ANTEP, CLASSIC, 4)        0.000000            3.500000
+                  M( H2, IZMIR, GOLD, 1)        628.5714            0.000000
+                  M( H2, IZMIR, GOLD, 2)        542.8571            0.000000
+                  M( H2, IZMIR, GOLD, 3)        457.1429            0.000000
+                  M( H2, IZMIR, GOLD, 4)        971.4286            0.000000
+               M( H2, IZMIR, CLASSIC, 1)        0.000000            0.000000
+               M( H2, IZMIR, CLASSIC, 2)        0.000000            0.000000
+               M( H2, IZMIR, CLASSIC, 3)        0.000000            0.000000
+               M( H2, IZMIR, CLASSIC, 4)        0.000000            0.000000
+                  M( H2, ANTEP, GOLD, 1)        57.14286            0.000000
+                  M( H2, ANTEP, GOLD, 2)        257.1429            0.000000
+                  M( H2, ANTEP, GOLD, 3)        428.5714            0.000000
+                  M( H2, ANTEP, GOLD, 4)        0.000000            0.000000
+               M( H2, ANTEP, CLASSIC, 1)        0.000000            0.000000
+               M( H2, ANTEP, CLASSIC, 2)        0.000000            0.000000
+               M( H2, ANTEP, CLASSIC, 3)        0.000000            0.000000
+               M( H2, ANTEP, CLASSIC, 4)        0.000000            0.000000
+                  M( H3, IZMIR, GOLD, 1)        0.000000            1.000000
+                  M( H3, IZMIR, GOLD, 2)        0.000000            1.000000
+                  M( H3, IZMIR, GOLD, 3)        0.000000            1.000000
+                  M( H3, IZMIR, GOLD, 4)        0.000000            1.000000
+               M( H3, IZMIR, CLASSIC, 1)        900.0000            0.000000
+               M( H3, IZMIR, CLASSIC, 2)        1050.000            0.000000
+               M( H3, IZMIR, CLASSIC, 3)        1200.000            0.000000
+               M( H3, IZMIR, CLASSIC, 4)        300.0000            0.000000
+                  M( H3, ANTEP, GOLD, 1)        0.000000            1.000000
+                  M( H3, ANTEP, GOLD, 2)        0.000000            1.000000
+                  M( H3, ANTEP, GOLD, 3)        0.000000            1.000000
+                  M( H3, ANTEP, GOLD, 4)        0.000000            1.000000
+               M( H3, ANTEP, CLASSIC, 1)        0.000000            0.000000
+               M( H3, ANTEP, CLASSIC, 2)        0.000000            0.000000
+               M( H3, ANTEP, CLASSIC, 3)        0.000000            0.000000
+               M( H3, ANTEP, CLASSIC, 4)        1050.000            0.000000
+                  M( H4, IZMIR, GOLD, 1)        157.1429            0.000000
+                  M( H4, IZMIR, GOLD, 2)        135.7143            0.000000
+                  M( H4, IZMIR, GOLD, 3)        114.2857            0.000000
+                  M( H4, IZMIR, GOLD, 4)        242.8571            0.000000
+               M( H4, IZMIR, CLASSIC, 1)        0.000000            3.500000
+               M( H4, IZMIR, CLASSIC, 2)        0.000000            3.500000
+               M( H4, IZMIR, CLASSIC, 3)        0.000000            3.500000
+               M( H4, IZMIR, CLASSIC, 4)        0.000000            3.500000
+                  M( H4, ANTEP, GOLD, 1)        14.28571            0.000000
+                  M( H4, ANTEP, GOLD, 2)        64.28571            0.000000
+                  M( H4, ANTEP, GOLD, 3)        107.1429            0.000000
+                  M( H4, ANTEP, GOLD, 4)        0.000000            0.000000
+               M( H4, ANTEP, CLASSIC, 1)        0.000000            3.500000
+               M( H4, ANTEP, CLASSIC, 2)        0.000000            3.500000
+               M( H4, ANTEP, CLASSIC, 3)        0.000000            3.500000
+               M( H4, ANTEP, CLASSIC, 4)        0.000000            3.500000
+                  STOK( ANKARA, GOLD, 1)        0.000000            0.000000
+                  STOK( ANKARA, GOLD, 2)        0.000000            8.000000
+                  STOK( ANKARA, GOLD, 3)        0.000000            0.000000
+                  STOK( ANKARA, GOLD, 4)        0.000000            8.000000
+               STOK( ANKARA, CLASSIC, 1)        0.000000            6.000000
+               STOK( ANKARA, CLASSIC, 2)        0.000000            6.000000
+               STOK( ANKARA, CLASSIC, 3)        0.000000            0.000000
+               STOK( ANKARA, CLASSIC, 4)        0.000000            12.00000
+                   STOK( BURSA, GOLD, 1)        0.000000            4.000000
+                   STOK( BURSA, GOLD, 2)        0.000000            4.000000
+                   STOK( BURSA, GOLD, 3)        0.000000            4.000000
+                   STOK( BURSA, GOLD, 4)        0.000000            47.14286
+                STOK( BURSA, CLASSIC, 1)        0.000000            6.000000
+                STOK( BURSA, CLASSIC, 2)        0.000000            6.000000
+                STOK( BURSA, CLASSIC, 3)        0.000000            6.000000
+                STOK( BURSA, CLASSIC, 4)        0.000000            46.00000
+                   STOK( KONYA, GOLD, 1)        0.000000            0.000000
+                   STOK( KONYA, GOLD, 2)        0.000000            0.000000
+                   STOK( KONYA, GOLD, 3)        0.000000            0.000000
+                   STOK( KONYA, GOLD, 4)        0.000000            43.64286
+                STOK( KONYA, CLASSIC, 1)        0.000000            6.000000
+                STOK( KONYA, CLASSIC, 2)        0.000000            33.64286
+                STOK( KONYA, CLASSIC, 3)        0.000000            42.50000
+                STOK( KONYA, CLASSIC, 4)        0.000000            6.000000
+              T1BIRIMMAL( IZMIR, ANKARA)        6.200000            0.000000
+               T1BIRIMMAL( IZMIR, BURSA)        3.300000            0.000000
+               T1BIRIMMAL( IZMIR, KONYA)        4.500000            0.000000
+              T1BIRIMMAL( ANTEP, ANKARA)        7.000000            0.000000
+               T1BIRIMMAL( ANTEP, BURSA)        9.000000            0.000000
+               T1BIRIMMAL( ANTEP, KONYA)        5.500000            0.000000
+              S( IZMIR, ANKARA, GOLD, 1)        0.000000            46.04286
+              S( IZMIR, ANKARA, GOLD, 2)        0.000000            42.04286
+              S( IZMIR, ANKARA, GOLD, 3)        0.000000            46.04286
+              S( IZMIR, ANKARA, GOLD, 4)        0.000000            42.04286
+           S( IZMIR, ANKARA, CLASSIC, 1)        0.000000            42.90000
+           S( IZMIR, ANKARA, CLASSIC, 2)        0.000000            42.90000
+           S( IZMIR, ANKARA, CLASSIC, 3)        0.000000            42.90000
+           S( IZMIR, ANKARA, CLASSIC, 4)        0.000000            36.90000
+               S( IZMIR, BURSA, GOLD, 1)        1100.000            0.000000
+               S( IZMIR, BURSA, GOLD, 2)        950.0000            0.000000
+               S( IZMIR, BURSA, GOLD, 3)        800.0000            0.000000
+               S( IZMIR, BURSA, GOLD, 4)        1700.000            0.000000
+            S( IZMIR, BURSA, CLASSIC, 1)        900.0000            0.000000
+            S( IZMIR, BURSA, CLASSIC, 2)        1050.000            0.000000
+            S( IZMIR, BURSA, CLASSIC, 3)        1200.000            0.000000
+            S( IZMIR, BURSA, CLASSIC, 4)        300.0000            0.000000
+               S( IZMIR, KONYA, GOLD, 1)        0.000000            44.34286
+               S( IZMIR, KONYA, GOLD, 2)        0.000000            40.34286
+               S( IZMIR, KONYA, GOLD, 3)        0.000000            8.700000
+               S( IZMIR, KONYA, GOLD, 4)        0.000000            4.700000
+            S( IZMIR, KONYA, CLASSIC, 1)        0.000000            4.700000
+            S( IZMIR, KONYA, CLASSIC, 2)        0.000000            4.700000
+            S( IZMIR, KONYA, CLASSIC, 3)        0.000000            4.700000
+            S( IZMIR, KONYA, CLASSIC, 4)        0.000000            41.20000
+              S( ANTEP, ANKARA, GOLD, 1)        0.000000            41.14286
+              S( ANTEP, ANKARA, GOLD, 2)        0.000000            37.14286
+              S( ANTEP, ANKARA, GOLD, 3)        0.000000            41.14286
+              S( ANTEP, ANKARA, GOLD, 4)        0.000000            37.14286
+           S( ANTEP, ANKARA, CLASSIC, 1)        0.000000            38.00000
+           S( ANTEP, ANKARA, CLASSIC, 2)        0.000000            38.00000
+           S( ANTEP, ANKARA, CLASSIC, 3)        0.000000            38.00000
+           S( ANTEP, ANKARA, CLASSIC, 4)        0.000000            32.00000
+               S( ANTEP, BURSA, GOLD, 1)        100.0000            0.000000
+               S( ANTEP, BURSA, GOLD, 2)        450.0000            0.000000
+               S( ANTEP, BURSA, GOLD, 3)        750.0000            0.000000
+               S( ANTEP, BURSA, GOLD, 4)        0.000000            0.000000
+            S( ANTEP, BURSA, CLASSIC, 1)        0.000000            0.000000
+            S( ANTEP, BURSA, CLASSIC, 2)        0.000000            0.000000
+            S( ANTEP, BURSA, CLASSIC, 3)        0.000000            0.000000
+            S( ANTEP, BURSA, CLASSIC, 4)        1050.000            0.000000
+               S( ANTEP, KONYA, GOLD, 1)        0.000000            39.64286
+               S( ANTEP, KONYA, GOLD, 2)        0.000000            35.64286
+               S( ANTEP, KONYA, GOLD, 3)        0.000000            4.000000
+               S( ANTEP, KONYA, GOLD, 4)        0.000000            0.000000
+            S( ANTEP, KONYA, CLASSIC, 1)        0.000000            0.000000
+            S( ANTEP, KONYA, CLASSIC, 2)        0.000000            0.000000
+            S( ANTEP, KONYA, CLASSIC, 3)        0.000000            0.000000
+            S( ANTEP, KONYA, CLASSIC, 4)        0.000000            36.50000
+                 T2BIRIMMAL( ANKARA, M1)        4.500000            0.000000
+                 T2BIRIMMAL( ANKARA, M2)        5.000000            0.000000
+                 T2BIRIMMAL( ANKARA, M3)        7.000000            0.000000
+                  T2BIRIMMAL( BURSA, M1)        2.500000            0.000000
+                  T2BIRIMMAL( BURSA, M2)        3.300000            0.000000
+                  T2BIRIMMAL( BURSA, M3)        6.000000            0.000000
+                  T2BIRIMMAL( KONYA, M1)        3.000000            0.000000
+                  T2BIRIMMAL( KONYA, M2)        4.000000            0.000000
+                  T2BIRIMMAL( KONYA, M3)        5.000000            0.000000
+                 K( ANKARA, M1, GOLD, 1)        0.000000            1.000000
+                 K( ANKARA, M1, GOLD, 2)        0.000000            1.000000
+                 K( ANKARA, M1, GOLD, 3)        0.000000            1.000000
+                 K( ANKARA, M1, GOLD, 4)        0.000000            1.000000
+              K( ANKARA, M1, CLASSIC, 1)        0.000000            1.000000
+              K( ANKARA, M1, CLASSIC, 2)        0.000000            1.000000
+              K( ANKARA, M1, CLASSIC, 3)        0.000000            1.000000
+              K( ANKARA, M1, CLASSIC, 4)        0.000000            1.000000
+                 K( ANKARA, M2, GOLD, 1)        0.000000           0.7000000
+                 K( ANKARA, M2, GOLD, 2)        0.000000           0.7000000
+                 K( ANKARA, M2, GOLD, 3)        0.000000           0.7000000
+                 K( ANKARA, M2, GOLD, 4)        0.000000           0.7000000
+              K( ANKARA, M2, CLASSIC, 1)        0.000000           0.7000000
+              K( ANKARA, M2, CLASSIC, 2)        0.000000           0.7000000
+              K( ANKARA, M2, CLASSIC, 3)        0.000000           0.7000000
+              K( ANKARA, M2, CLASSIC, 4)        0.000000           0.7000000
+                 K( ANKARA, M3, GOLD, 1)        0.000000            0.000000
+                 K( ANKARA, M3, GOLD, 2)        0.000000            0.000000
+                 K( ANKARA, M3, GOLD, 3)        0.000000            0.000000
+                 K( ANKARA, M3, GOLD, 4)        0.000000            0.000000
+              K( ANKARA, M3, CLASSIC, 1)        0.000000            0.000000
+              K( ANKARA, M3, CLASSIC, 2)        0.000000            0.000000
+              K( ANKARA, M3, CLASSIC, 3)        0.000000            0.000000
+              K( ANKARA, M3, CLASSIC, 4)        0.000000            0.000000
+                  K( BURSA, M1, GOLD, 1)        500.0000            0.000000
+                  K( BURSA, M1, GOLD, 2)        600.0000            0.000000
+                  K( BURSA, M1, GOLD, 3)        650.0000            0.000000
+                  K( BURSA, M1, GOLD, 4)        700.0000            0.000000
+               K( BURSA, M1, CLASSIC, 1)        400.0000            0.000000
+               K( BURSA, M1, CLASSIC, 2)        450.0000            0.000000
+               K( BURSA, M1, CLASSIC, 3)        500.0000            0.000000
+               K( BURSA, M1, CLASSIC, 4)        550.0000            0.000000
+                  K( BURSA, M2, GOLD, 1)        300.0000            0.000000
+                  K( BURSA, M2, GOLD, 2)        350.0000            0.000000
+                  K( BURSA, M2, GOLD, 3)        400.0000            0.000000
+                  K( BURSA, M2, GOLD, 4)        450.0000            0.000000
+               K( BURSA, M2, CLASSIC, 1)        200.0000            0.000000
+               K( BURSA, M2, CLASSIC, 2)        250.0000            0.000000
+               K( BURSA, M2, CLASSIC, 3)        300.0000            0.000000
+               K( BURSA, M2, CLASSIC, 4)        350.0000            0.000000
+                  K( BURSA, M3, GOLD, 1)        400.0000            0.000000
+                  K( BURSA, M3, GOLD, 2)        450.0000            0.000000
+                  K( BURSA, M3, GOLD, 3)        500.0000            0.000000
+                  K( BURSA, M3, GOLD, 4)        550.0000            0.000000
+               K( BURSA, M3, CLASSIC, 1)        300.0000            0.000000
+               K( BURSA, M3, CLASSIC, 2)        350.0000            0.000000
+               K( BURSA, M3, CLASSIC, 3)        400.0000            0.000000
+               K( BURSA, M3, CLASSIC, 4)        450.0000            0.000000
+                  K( KONYA, M1, GOLD, 1)        0.000000            1.500000
+                  K( KONYA, M1, GOLD, 2)        0.000000            1.500000
+                  K( KONYA, M1, GOLD, 3)        0.000000            1.500000
+                  K( KONYA, M1, GOLD, 4)        0.000000            1.500000
+               K( KONYA, M1, CLASSIC, 1)        0.000000            1.500000
+               K( KONYA, M1, CLASSIC, 2)        0.000000            1.500000
+               K( KONYA, M1, CLASSIC, 3)        0.000000            1.500000
+               K( KONYA, M1, CLASSIC, 4)        0.000000            1.500000
+                  K( KONYA, M2, GOLD, 1)        0.000000            1.700000
+                  K( KONYA, M2, GOLD, 2)        0.000000            1.700000
+                  K( KONYA, M2, GOLD, 3)        0.000000            1.700000
+                  K( KONYA, M2, GOLD, 4)        0.000000            1.700000
+               K( KONYA, M2, CLASSIC, 1)        0.000000            1.700000
+               K( KONYA, M2, CLASSIC, 2)        0.000000            1.700000
+               K( KONYA, M2, CLASSIC, 3)        0.000000            1.700000
+               K( KONYA, M2, CLASSIC, 4)        0.000000            1.700000
+                  K( KONYA, M3, GOLD, 1)        0.000000            0.000000
+                  K( KONYA, M3, GOLD, 2)        0.000000            0.000000
+                  K( KONYA, M3, GOLD, 3)        0.000000            0.000000
+                  K( KONYA, M3, GOLD, 4)        0.000000            0.000000
+               K( KONYA, M3, CLASSIC, 1)        0.000000            0.000000
+               K( KONYA, M3, CLASSIC, 2)        0.000000            0.000000
+               K( KONYA, M3, CLASSIC, 3)        0.000000            0.000000
+               K( KONYA, M3, CLASSIC, 4)        0.000000            0.000000
+              TALEPMIKTARI( 1, M1, GOLD)        500.0000            0.000000
+           TALEPMIKTARI( 1, M1, CLASSIC)        400.0000            0.000000
+              TALEPMIKTARI( 1, M2, GOLD)        300.0000            0.000000
+           TALEPMIKTARI( 1, M2, CLASSIC)        200.0000            0.000000
+              TALEPMIKTARI( 1, M3, GOLD)        400.0000            0.000000
+           TALEPMIKTARI( 1, M3, CLASSIC)        300.0000            0.000000
+              TALEPMIKTARI( 2, M1, GOLD)        600.0000            0.000000
+           TALEPMIKTARI( 2, M1, CLASSIC)        450.0000            0.000000
+              TALEPMIKTARI( 2, M2, GOLD)        350.0000            0.000000
+           TALEPMIKTARI( 2, M2, CLASSIC)        250.0000            0.000000
+              TALEPMIKTARI( 2, M3, GOLD)        450.0000            0.000000
+           TALEPMIKTARI( 2, M3, CLASSIC)        350.0000            0.000000
+              TALEPMIKTARI( 3, M1, GOLD)        650.0000            0.000000
+           TALEPMIKTARI( 3, M1, CLASSIC)        500.0000            0.000000
+              TALEPMIKTARI( 3, M2, GOLD)        400.0000            0.000000
+           TALEPMIKTARI( 3, M2, CLASSIC)        300.0000            0.000000
+              TALEPMIKTARI( 3, M3, GOLD)        500.0000            0.000000
+           TALEPMIKTARI( 3, M3, CLASSIC)        400.0000            0.000000
+              TALEPMIKTARI( 4, M1, GOLD)        700.0000            0.000000
+           TALEPMIKTARI( 4, M1, CLASSIC)        550.0000            0.000000
+              TALEPMIKTARI( 4, M2, GOLD)        450.0000            0.000000
+           TALEPMIKTARI( 4, M2, CLASSIC)        350.0000            0.000000
+              TALEPMIKTARI( 4, M3, GOLD)        550.0000            0.000000
+           TALEPMIKTARI( 4, M3, CLASSIC)        450.0000            0.000000
+
+                                     Row    Slack or Surplus      Dual Price
+                                       1        533840.7           -1.000000
+                                       2        0.000000           -10.00000
+                                       3        0.000000           -10.00000
+                                       4        0.000000           -10.00000
+                                       5        0.000000           -10.00000
+                                       6        0.000000           -17.00000
+                                       7        0.000000           -17.00000
+                                       8        0.000000           -17.00000
+                                       9        0.000000           -17.00000
+                                      10        0.000000           -10.00000
+                                      11        0.000000           -10.00000
+                                      12        0.000000           -10.00000
+                                      13        0.000000           -10.00000
+                                      14        0.000000           -17.00000
+                                      15        0.000000           -17.00000
+                                      16        0.000000           -17.00000
+                                      17        0.000000           -17.00000
+                                      18        0.000000           -22.85714
+                                      19        165.0000            0.000000
+                                      20        70.71429            0.000000
+                                      21        0.000000           -14.28571
+                                      22        0.000000           -22.85714
+                                      23        142.5000            0.000000
+                                      24        61.07143            0.000000
+                                      25        0.000000           -14.28571
+                                      26        0.000000           -22.85714
+                                      27        120.0000            0.000000
+                                      28        51.42857            0.000000
+                                      29        0.000000           -14.28571
+                                      30        0.000000           -22.85714
+                                      31        255.0000            0.000000
+                                      32        109.2857            0.000000
+                                      33        0.000000           -14.28571
+                                      34        0.000000            0.000000
+                                      35        180.0000            0.000000
+                                      36        0.000000           -10.00000
+                                      37        45.00000            0.000000
+                                      38        0.000000            0.000000
+                                      39        210.0000            0.000000
+                                      40        0.000000           -10.00000
+                                      41        52.50000            0.000000
+                                      42        0.000000            0.000000
+                                      43        240.0000            0.000000
+                                      44        0.000000           -10.00000
+                                      45        60.00000            0.000000
+                                      46        0.000000            0.000000
+                                      47        60.00000            0.000000
+                                      48        0.000000           -10.00000
+                                      49        15.00000            0.000000
+                                      50        0.000000           -22.85714
+                                      51        15.00000            0.000000
+                                      52        6.428571            0.000000
+                                      53        0.000000           -14.28571
+                                      54        0.000000           -22.85714
+                                      55        67.50000            0.000000
+                                      56        28.92857            0.000000
+                                      57        0.000000           -14.28571
+                                      58        0.000000           -22.85714
+                                      59        112.5000            0.000000
+                                      60        48.21429            0.000000
+                                      61        0.000000           -14.28571
+                                      62        0.000000           -22.85714
+                                      63        0.000000            0.000000
+                                      64        0.000000            0.000000
+                                      65        0.000000           -14.28571
+                                      66        0.000000            0.000000
+                                      67        0.000000            0.000000
+                                      68        0.000000           -10.00000
+                                      69        0.000000            0.000000
+                                      70        0.000000            0.000000
+                                      71        0.000000            0.000000
+                                      72        0.000000           -10.00000
+                                      73        0.000000            0.000000
+                                      74        0.000000            0.000000
+                                      75        0.000000            0.000000
+                                      76        0.000000           -10.00000
+                                      77        0.000000            0.000000
+                                      78        0.000000            0.000000
+                                      79        210.0000            0.000000
+                                      80        0.000000           -10.00000
+                                      81        52.50000            0.000000
+                                      82        1657.143            0.000000
+                                      83        1600.000            0.000000
+                                      84        1557.143            0.000000
+                                      85        1514.286            0.000000
+                                      86        1314.286            0.000000
+                                      87        1200.000            0.000000
+                                      88        1114.286            0.000000
+                                      89        1028.571            0.000000
+                                      90        1100.000            0.000000
+                                      91        950.0000            0.000000
+                                      92        800.0000            0.000000
+                                      93        650.0000            0.000000
+                                      94        1828.571            0.000000
+                                      95        1800.000            0.000000
+                                      96        1778.571            0.000000
+                                      97        1757.143            0.000000
+                                      98        0.000000            6.000000
+                                      99        0.000000            6.000000
+                                     100        0.000000            6.000000
+                                     101        0.000000            6.000000
+                                     102        0.000000            3.000000
+                                     103        0.000000            3.000000
+                                     104        0.000000            3.000000
+                                     105        0.000000            3.000000
+                                     106        200.0000            0.000000
+                                     107        200.0000            0.000000
+                                     108        200.0000            0.000000
+                                     109        200.0000            0.000000
+                                     110        1500.000            0.000000
+                                     111        1150.000            0.000000
+                                     112        850.0000            0.000000
+                                     113        550.0000            0.000000
+                                     114        500.0000            0.000000
+                                     115        500.0000            0.000000
+                                     116        500.0000            0.000000
+                                     117        500.0000            0.000000
+                                     118        300.0000            0.000000
+                                     119        300.0000            0.000000
+                                     120        300.0000            0.000000
+                                     121        300.0000            0.000000
+                                     122        0.000000           0.7000000
+                                     123        0.000000           0.7000000
+                                     124        0.000000           0.7000000
+                                     125        0.000000           0.7000000
+                                     126        1900.000            0.000000
+                                     127        1550.000            0.000000
+                                     128        1250.000            0.000000
+                                     129        950.0000            0.000000
+                                     130        0.000000           -39.84286
+                                     131        0.000000           -39.84286
+                                     132        0.000000           -39.84286
+                                     133        0.000000           -39.84286
+                                     134        0.000000           -36.70000
+                                     135        0.000000           -36.70000
+                                     136        0.000000           -36.70000
+                                     137        0.000000           -36.70000
+                                     138        0.000000           -34.14286
+                                     139        0.000000           -34.14286
+                                     140        0.000000           -34.14286
+                                     141        0.000000           -34.14286
+                                     142        0.000000           -31.00000
+                                     143        0.000000           -31.00000
+                                     144        0.000000           -31.00000
+                                     145        0.000000           -31.00000
+                                     146        0.000000            0.000000
+                                     147        0.000000            0.000000
+                                     148        0.000000            0.000000
+                                     149        0.000000            0.000000
+                                     150        3500.000            0.000000
+                                     151        3500.000            0.000000
+                                     152        3500.000            0.000000
+                                     153        3500.000            0.000000
+                                     154        0.000000            0.000000
+                                     155        0.000000            27.64286
+                                     156        0.000000            0.000000
+                                     157        0.000000            0.000000
+                                     158        0.000000            0.000000
+                                     159        0.000000            4.000000
+                                     160        0.000000            0.000000
+                                     161        0.000000            4.000000
+                                     162        0.000000            0.000000
+                                     163        0.000000            0.000000
+                                     164        0.000000            0.000000
+                                     165        0.000000            6.000000
+                                     166        0.000000            43.14286
+                                     167        0.000000            43.14286
+                                     168        0.000000            43.14286
+                                     169        0.000000            43.14286
+                                     170        0.000000            40.00000
+                                     171        0.000000            40.00000
+                                     172        0.000000            40.00000
+                                     173        0.000000            40.00000
+                                     174        0.000000            0.000000
+                                     175        0.000000            4.000000
+                                     176        0.000000            35.64286
+                                     177        0.000000            39.64286
+                                     178        0.000000            36.50000
+                                     179        0.000000            36.50000
+                                     180        0.000000            36.50000
+                                     181        0.000000            0.000000
+                                     182        0.000000           -45.64286
+                                     183        0.000000           -42.50000
+                                     184        0.000000           -46.44286
+                                     185        0.000000           -43.30000
+                                     186        0.000000           -49.14286
+                                     187        0.000000           -46.00000
+                                     188        0.000000           -45.64286
+                                     189        0.000000           -42.50000
+                                     190        0.000000           -46.44286
+                                     191        0.000000           -43.30000
+                                     192        0.000000           -49.14286
+                                     193        0.000000           -46.00000
+                                     194        0.000000           -45.64286
+                                     195        0.000000           -42.50000
+                                     196        0.000000           -46.44286
+                                     197        0.000000           -43.30000
+                                     198        0.000000           -49.14286
+                                     199        0.000000           -46.00000
+                                     200        0.000000           -45.64286
+                                     201        0.000000           -42.50000
+                                     202        0.000000           -46.44286
+                                     203        0.000000           -43.30000
+                                     204        0.000000           -49.14286
+                                     205        0.000000           -46.00000
+                                     206        0.000000            42.14286
+                                     207        0.000000            38.14286
+                                     208        0.000000            42.14286
+                                     209        0.000000            38.14286
+                                     210        0.000000            39.00000
+                                     211        0.000000            39.00000
+                                     212        0.000000            39.00000
+                                     213        0.000000            33.00000
+                                     214        98800.00            0.000000
+                                     215        98600.00            0.000000
+                                     216        98450.00            0.000000
+                                     217        98300.00            0.000000
+                                     218        99100.00            0.000000
+                                     219        98950.00            0.000000
+                                     220        98800.00            0.000000
+                                     221        98650.00            0.000000
+                                     222        0.000000            44.14286
+                                     223        0.000000            40.14286
+                                     224        0.000000            8.500000
+                                     225        0.000000            4.500000
+                                     226        0.000000            4.500000
+                                     227        0.000000            4.500000
+                                     228        0.000000            4.500000
+                                     229        0.000000            41.00000
+                                     230        1.000000            0.000000
+
