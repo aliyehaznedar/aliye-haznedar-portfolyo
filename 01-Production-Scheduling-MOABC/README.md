@@ -21,8 +21,8 @@ Yapılan simülasyon ve deneysel analizler sonucunda:
 ## 📁 Depo İçeriği
 * `/MOABC_DHRHFSP_SDST_FAST_FIXED.m`: Geliştirilmiş, ESRS tasarruf operatörlü ana MATLAB kod bloğu.
 * `/DHRHFSP_SDST_dataset_2.xlsx`: Fabrika, makine, işleme süreleri ve TOU elektrik tarifesi parametrelerini içeren girdi veri seti.
-* `/UPK_SONRAPOR_2.pdf`: Projenin tüm matematiksel formülasyonunu, Gantt şemalarını ve endüstriyel analizlerini içeren detaylı akademik rapor[cite: 6, 10].
-* `/Proje_Sunumu.pdf`: Proje sunum slaytları[cite: 11].
+* `/UPK_SONRAPOR_2.pdf`: Projenin tüm matematiksel formülasyonunu, Gantt şemalarını ve endüstriyel analizlerini içeren detaylı akademik rapor.
+* `/Proje_Sunumu.pdf`: Proje sunum slaytları.
 
 ## 👥 Proje Sahibi
 Aliye Haznedar
